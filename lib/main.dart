@@ -1,21 +1,42 @@
-import 'package:flutter/material.dart';
+import 'package:anilmastertest/Keys.dart';
+import 'package:anilmastertest/Routes.dart';
+import 'package:anilmastertest/home_page.dart';
 import 'package:anilmastertest/pages/auth_page/log_in_page.dart';
+import 'package:anilmastertest/pages/buttomnav.dart';
+import 'package:anilmastertest/redux/app_state.dart';
+import 'package:anilmastertest/redux/middleware/fetch_data.dart';
+import 'package:anilmastertest/redux/reducers/todo_reducer.dart';
+import 'package:anilmastertest/redux/store.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:get/route_manager.dart';
+import 'package:redux/redux.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'IQ LEVEL',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return StoreProvider(
+      store: store,
+      child: GetMaterialApp(
+        navigatorKey: Keys.navKey,
+        initialRoute: Routes.mainStreen,
+        routes: {
+          Routes.homeScreen: (context) {
+            return HomePage();
+          },
+          Routes.mainStreen: (context) {
+            return MainScreen();
+          },
+          Routes.login: (context) {
+            return LogInPage();
+          }
+        },
       ),
-      home: const LogInPage(),
     );
   }
 }

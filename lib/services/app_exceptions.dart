@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 class AppException implements Exception {
-  final String? message;
+  final message;
   final String? prefix;
   final String? url;
   AppException([this.message, this.prefix, this.url]);
 }
 
 class BadRequestException extends AppException {
-  BadRequestException([String? message, String? url])
+  BadRequestException([Object? message, String? url])
       : super(message, "Bad Request", url);
 }
 
